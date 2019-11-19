@@ -1,0 +1,12 @@
+---
+# - name: ensure the GitLab Runner is registered
+#   gitlab_runner:
+#     api_url: "{{ dubzland_gitlab_runner_api_url }}"
+#     api_token: "{{ dubzland_gitlab_runner_api_token }}"
+#     registration_token: "{{ dubzland_gitlab_runner_registration_token }}"
+#     description: "{{ dubzland_gitlab_runner_description }}"
+#     state: present
+#     active: True
+#     tag_list: ['docker']
+#     run_untagged: True
+#     locked: False

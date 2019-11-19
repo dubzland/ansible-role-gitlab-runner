@@ -1,0 +1,7 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: update package cache
+      package:
+        update_cache: yes

@@ -1,0 +1,3 @@
+---
+dubzland_gitlab_runner_repo_script_url: "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh"
+dubzland_gitlab_runner_package_name: "gitlab-runner"

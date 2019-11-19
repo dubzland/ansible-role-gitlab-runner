@@ -1,0 +1,37 @@
+---
+- when: ansible_distribution == 'Debian'
+  block:
+    - name: ensure the GitLab Runner repo installation script is present
+      get_url:
+        url: "{{ dubzland_gitlab_runner_repo_script_url }}"
+        dest: /tmp/gitlab_runner_repo_install.sh
+      tags:
+        - gitlab
+
+    - name: ensure the GitLab Runner repo is installed
+      command: bash /tmp/gitlab_runner_repo_install.sh
+      args:
+        creates: /etc/apt/sources.list.d/runner_gitlab-runner.list
+      tags:
+        - gitlab
+
+    - name: ensure GitLab Runner is pinned to the GitLab repo
+      copy:
+        content: |
+          Explanation: Prefer GitLab provided packages over the Debian native ones
+          Package: gitlab-runner
+          Pin: origin packages.gitlab.com
+          Pin-Priority: 1001
+        dest: /etc/apt/preferences.d/pin-gitlab-runner.pref
+        owner: root
+        group: root
+        mode: 0600
+      tags:
+        - gitlab
+
+- name: ensure GitLab Runner is installed
+  package:
+    name: "{{ dubzland_gitlab_runner_package_name }}"
+    state: present
+  tags:
+    - gitlab
